@@ -1,0 +1,8 @@
+[general]
+name=Bug Report
+description=fornece relatórios de erros
+version=0.0.2
+author=1cgeo
+email=
+qgisMinimumVersion=2.0
+qgisMaximumVersion=3.99
