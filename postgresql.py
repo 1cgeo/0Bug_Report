@@ -1,4 +1,4 @@
-import os, sys, psycopg2, json
+import os, sys, psycopg2
 
 class Postgresql(object):
 
@@ -35,4 +35,26 @@ class Postgresql(object):
                 str(erro_type), str(description), str(qgis_version), 
                 str(operational_system), str(plugins_versions)
             )
+        )
+
+    def getErrorsByDate(self, startDate, endDate):
+        self.cursor.execute(
+            '''
+                SELECT * FROM "erros"."erros_qgis" 
+                WHERE 
+                    date(data_hora) >= date(to_timestamp(%s)) AND date(data_hora) <= date(to_timestamp(%s))
+                ORDER BY data_hora DESC;
+            ''',
+            (startDate, endDate)
+        )
+        return self.cursor.fetchall()
+
+    def setFixedError(self, errorId, fixed):
+        self.cursor.execute(
+            '''
+                UPDATE "erros"."erros_qgis" 
+                SET corrigido = %s
+                WHERE id = %s;
+            ''',
+            (fixed, errorId)
         )
