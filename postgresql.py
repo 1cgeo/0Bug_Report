@@ -1,4 +1,5 @@
 import os, sys, psycopg2
+import json
 
 class Postgresql(object):
 
