@@ -50,12 +50,12 @@ class Postgresql(object):
         )
         return self.cursor.fetchall()
 
-    def setFixedError(self, errorId, fixed):
+    def setFixedError(self, errorIds, fixed):
         self.cursor.execute(
             '''
                 UPDATE "erros"."erros_qgis" 
                 SET corrigido = %s
-                WHERE id = %s;
+                WHERE id = ANY(%s);
             ''',
-            (fixed, errorId)
+            (fixed, errorIds)
         )

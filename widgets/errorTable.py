@@ -23,6 +23,7 @@ class ErrorTable(QtWidgets.QDialog):
         self.postgresql = Postgresql()
         self.setup()
         self.fetchDataByDate()
+        self.showFixedCbx.stateChanged.connect(lambda state: self.fetchDataByDate())
         
     def getUIPath(self):
         return os.path.join(
@@ -42,6 +43,8 @@ class ErrorTable(QtWidgets.QDialog):
             self.startDe.dateTime().toTime_t(),
             self.endDe.dateTime().toTime_t()
         )
+        if not self.showFixedCbx.isChecked():
+            data = [ d for d in data if not d[9] ]
         self.addRows(data)
         QtWidgets.QApplication.restoreOverrideCursor()
 
@@ -268,9 +271,22 @@ class ErrorTable(QtWidgets.QDialog):
 
     def fixError(self, row):
         errorId = self.getRowData(row)
-        self.postgresql.setFixedError(errorId, True)
+        self.postgresql.setFixedError([errorId], True)
         self.showInfo('Aviso', 'Salvo com sucesso!')
         self.fetchDataByDate()
+
+    @QtCore.pyqtSlot(bool)
+    def on_deselectBtn_clicked(self, b):
+        self.tableWidget.clearSelection()
+
+    @QtCore.pyqtSlot(bool)
+    def on_fixSelectionBtn_clicked(self, b):
+        errorIds = []
+        for item in self.tableWidget.selectionModel().selectedRows():
+            errorIds.append( self.getRowData(item.row()) )
+        self.postgresql.setFixedError(errorIds, True)
+        self.fetchDataByDate()
+        self.showInfo('Aviso', 'Salvo com sucesso!')
 
     @QtCore.pyqtSlot(str)
     def on_searchLe_textEdited(self, text):
