@@ -5,6 +5,7 @@ from ..postgresql import Postgresql
 import textwrap
 import json
 from .expandCell import ExpandCell
+from .sortLabelTableWidgetItem import SortLabelTableWidgetItem
 
 class ErrorTable(QtWidgets.QDialog):
     
@@ -24,6 +25,7 @@ class ErrorTable(QtWidgets.QDialog):
         self.setup()
         self.fetchDataByDate()
         self.showFixedCbx.stateChanged.connect(lambda state: self.fetchDataByDate())
+        self.tableWidget.setSortingEnabled(True)
         
     def getUIPath(self):
         return os.path.join(
@@ -206,7 +208,7 @@ class ErrorTable(QtWidgets.QDialog):
         return item
 
     def createLabel(self, text, row, col):
-        #self.tableWidget.setItem(row, col, SortLabelTableWidgetItem())
+        self.tableWidget.setItem(row, col, SortLabelTableWidgetItem())
         wd = QtWidgets.QWidget()
         layout = QtWidgets.QHBoxLayout(wd)
         wrapper = textwrap.TextWrapper(width=40)
@@ -218,7 +220,7 @@ class ErrorTable(QtWidgets.QDialog):
         return wd
 
     def createExpandLabel(self, text, row, col):
-        #self.tableWidget.setItem(row, col, SortLabelTableWidgetItem())
+        self.tableWidget.setItem(row, col, SortLabelTableWidgetItem())
         wd = QtWidgets.QWidget()
         layout = QtWidgets.QHBoxLayout(wd)
         wrapper = textwrap.TextWrapper(width=40)
