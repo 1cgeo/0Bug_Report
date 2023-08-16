@@ -13,13 +13,13 @@ class SortLabelTableWidgetItem(QTableWidgetItem):
     def getCurrentValue(self):
         cell = self.tableWidget().cellWidget(self.row(), self.column())
         if not(cell):
-            return None
+            return ''
         widget = cell.layout().itemAt(0).widget()
         return widget.text()
 
     def getOtherValue(self, other):
         cell = self.tableWidget().cellWidget(other.row(), other.column())
         if not(cell):
-            return None
+            return ''
         widget = cell.layout().itemAt(0).widget()
         return widget.text()
