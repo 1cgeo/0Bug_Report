@@ -248,7 +248,7 @@ class ErrorTable(QtWidgets.QDialog):
         dlg.exec_()
 
     def createFixLabel(self, text, row, col):
-        #self.tableWidget.setItem(row, col, SortLabelTableWidgetItem())
+        # self.tableWidget.setItem(row, col, SortLabelTableWidgetItem())
         wd = QtWidgets.QWidget()
         layout = QtWidgets.QHBoxLayout(wd)
         wrapper = textwrap.TextWrapper(width=40)
@@ -345,7 +345,7 @@ class ErrorTable(QtWidgets.QDialog):
         [ d.close() for d in self.findChildren(typeWidget) ]
 
     def createCombobox(self, row, col, mapValues, currentValue, handle=None ):
-        #self.tableWidget.setItem(row, col, SortComboTableWidgetItem())
+        # self.tableWidget.setItem(row, col, SortComboTableWidgetItem())
         wd = QtWidgets.QWidget()
         layout = QtWidgets.QHBoxLayout(wd)
         combo = QtWidgets.QComboBox(self.tableWidget)

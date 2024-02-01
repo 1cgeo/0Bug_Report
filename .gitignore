@@ -1,5 +1,4 @@
 *.log
-*.sql
 Tools/LoadData/forms/*.ui
 *.pyc
 *.bkp

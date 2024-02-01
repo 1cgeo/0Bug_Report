@@ -21,7 +21,7 @@
     <widget class="QTableWidget" name="tableWidget">
      <column>
       <property name="text">
-       <string>Id</string>
+       <string>ID</string>
       </property>
      </column>
      <column>
@@ -51,7 +51,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Versão Qgis</string>
+       <string>Versão QGIS</string>
       </property>
      </column>
      <column>
@@ -126,7 +126,7 @@
    <item row="1" column="0">
     <widget class="QCheckBox" name="showFixedCbx">
      <property name="text">
-      <string>Mostra Corrigidos</string>
+      <string>Mostrar Corrigidos</string>
      </property>
     </widget>
    </item>
@@ -148,14 +148,14 @@
      <item>
       <widget class="QPushButton" name="fixSelectionBtn">
        <property name="text">
-        <string>Marca seleção como corrigido</string>
+        <string>Marcar selecionados como corrigidos</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="deselectBtn">
        <property name="text">
-        <string>Deselecionar</string>
+        <string>Desselecionar</string>
        </property>
       </widget>
      </item>
