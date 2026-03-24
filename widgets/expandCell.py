@@ -1,5 +1,5 @@
 import os, sys, copy
-from PyQt5 import QtCore, uic, QtWidgets, QtGui
+from qgis.PyQt import QtCore, uic, QtWidgets, QtGui
 from ..messages.message import Message
 from ..postgresql import Postgresql
 import textwrap

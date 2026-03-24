@@ -16,7 +16,7 @@ class Postgresql(object):
             u"dbname='{0}' user='{1}' host='{2}' port='{3}' password='{4}'".format(
                 config['DB_NAME'],
                 config['DB_USER'],
-                config['DB_IP'],
+                config['DB_HOST'],
                 config['DB_PORT'],
                 config['DB_PASSWORD']
             )

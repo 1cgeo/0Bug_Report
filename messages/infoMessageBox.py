@@ -1,5 +1,4 @@
-import os
-from PyQt5 import QtWidgets, uic
+from qgis.PyQt import QtWidgets
 
 class InfoMessageBox:
 

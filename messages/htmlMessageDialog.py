@@ -1,6 +1,6 @@
 
 import os
-from PyQt5 import QtWidgets, uic
+from qgis.PyQt import QtWidgets, uic
 
 class HtmlMessageDialog(QtWidgets.QDialog):
 
@@ -19,4 +19,4 @@ class HtmlMessageDialog(QtWidgets.QDialog):
     def show(self, parent, title, html):
         self.setWindowTitle(title)
         self.textEdit.setHtml(html)
-        self.exec_()
+        self.exec()

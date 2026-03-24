@@ -2,7 +2,7 @@ from .erroHandler import ErroHandler
 from qgis import utils
 from qgis.utils import iface
 import os
-from PyQt5 import QtWidgets, QtGui
+from qgis.PyQt import QtWidgets, QtGui
 from .widgets.errorTable import ErrorTable
 
 

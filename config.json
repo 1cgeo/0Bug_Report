@@ -1,7 +1,7 @@
 {
-    "DB_NAME" : "",
-    "DB_USER" : "",
-    "DB_IP" : "",
-    "DB_PORT" : "",
-    "DB_PASSWORD" : ""
+    "DB_NAME" : "controle_dgeo",
+    "DB_USER" : "controle_app",
+    "DB_HOST" : "10.25.163.12",
+    "DB_PORT" : "5434",
+    "DB_PASSWORD" : "controle_app"
 }

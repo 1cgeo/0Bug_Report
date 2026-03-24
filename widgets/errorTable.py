@@ -1,5 +1,5 @@
 import os, sys, copy
-from PyQt5 import QtCore, uic, QtWidgets, QtGui
+from qgis.PyQt import QtCore, uic, QtWidgets, QtGui
 from ..messages.message import Message
 from ..postgresql import Postgresql
 import textwrap
@@ -40,10 +40,10 @@ class ErrorTable(QtWidgets.QDialog):
         self.endDe.setDate(QtCore.QDate.currentDate())
 
     def fetchDataByDate(self):
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         data = self.postgresql.getErrorsByDate(
-            self.startDe.dateTime().toTime_t(),
-            self.endDe.dateTime().toTime_t()
+            self.startDe.dateTime().toSecsSinceEpoch(),
+            self.endDe.dateTime().toSecsSinceEpoch()
         )
         if not self.showFixedCbx.isChecked():
             data = [ d for d in data if not d[9] ]
@@ -171,7 +171,7 @@ class ErrorTable(QtWidgets.QDialog):
         )
         layout.addWidget(deleteBtn)
 
-        layout.setAlignment(QtCore.Qt.AlignCenter)
+        layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         layout.setContentsMargins(0,0,0,0)
         return wd
 
@@ -194,13 +194,13 @@ class ErrorTable(QtWidgets.QDialog):
 
     def createNotEditableItem(self, value):
         item = QtWidgets.QTableWidgetItem(self.validateValue(value))
-        item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+        item.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
         return item
 
     def createNotEditableItemNumber(self, value):
         item = QtWidgets.QTableWidgetItem()
-        item.setData(QtCore.Qt.DisplayRole, value)
-        item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+        item.setData(QtCore.Qt.ItemDataRole.DisplayRole, value)
+        item.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
         return item
     
     def createEditableItem(self, value):
@@ -215,7 +215,7 @@ class ErrorTable(QtWidgets.QDialog):
         te = QtWidgets.QLabel()
         te.setText('\n'.join(wrapper.wrap(text=text)))
         layout.addWidget(te)
-        layout.setAlignment(QtCore.Qt.AlignCenter)
+        layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         layout.setContentsMargins(0,0,0,0)
         return wd
 
@@ -239,13 +239,13 @@ class ErrorTable(QtWidgets.QDialog):
         )
         btn.clicked.connect(lambda b, text=text: self.expandText(text))
         layout.addWidget(btn)
-        layout.setAlignment(QtCore.Qt.AlignCenter)
+        layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         layout.setContentsMargins(0,0,0,0)
         return wd
 
     def expandText(self, text):
         dlg = ExpandCell(text)
-        dlg.exec_()
+        dlg.exec()
 
     def createFixLabel(self, text, row, col):
         # self.tableWidget.setItem(row, col, SortLabelTableWidgetItem())
@@ -267,7 +267,7 @@ class ErrorTable(QtWidgets.QDialog):
         )
         btn.clicked.connect(lambda b, row=row: self.fixError(row))
         layout.addWidget(btn)
-        layout.setAlignment(QtCore.Qt.AlignCenter)
+        layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         layout.setContentsMargins(0,0,0,0)
         return wd
 
@@ -360,7 +360,7 @@ class ErrorTable(QtWidgets.QDialog):
                 lambda *args, combo=combo, index=index: handle(combo, index)
             )
         layout.addWidget(combo)
-        layout.setAlignment(QtCore.Qt.AlignCenter)
+        layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         layout.setContentsMargins(0,0,0,0)
         return wd
 

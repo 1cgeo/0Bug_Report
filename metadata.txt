@@ -1,8 +1,8 @@
 [general]
 name=Bug Report
 description=Plug-in que centraliza os erros python do QGIS em um banco de dado Postgres e permite acessar um relatório centralizado.
-version=0.3.0
+version=0.4.0
 author=1cgeo
 email=dgeo@1cgeo.eb.mil.br
-qgisMinimumVersion=3.22
-qgisMaximumVersion=3.99
+qgisMinimumVersion=4.0
+qgisMaximumVersion=4.99

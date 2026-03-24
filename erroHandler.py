@@ -1,9 +1,8 @@
-from qgis.PyQt.QtWidgets import qApp
 from qgis.PyQt.QtCore import QMetaObject, QObject, QSettings, QThread, Qt, pyqtSlot
 import traceback, platform, os, uuid
 from qgis.PyQt.QtCore import QCoreApplication, QLocale, QThread
 from qgis.PyQt.QtWidgets import QPushButton, QApplication
-from qgis.core import Qgis, QgsMessageLog, qgsfunction, QgsMessageOutput
+from qgis.core import Qgis, QgsMessageLog, QgsMessageOutput
 from qgis.gui import QgsMessageBar
 from qgis.utils import iface, plugins
 from configparser import ConfigParser
@@ -124,11 +123,13 @@ class ErroHandler(object):
 
         widget = bar.createMessage(title, msg + " " + "See message log (Python Error) for more details.")
         widget.setProperty("Error", msg)
-        stackbutton = QPushButton("Stack trace", pressed=functools.partial(ErroHandler.open_stack_dialog, etype, value, tb, msg))
-        button = QPushButton("View message log", pressed=ErroHandler.show_message_log)
+        stackbutton = QPushButton("Stack trace")
+        stackbutton.pressed.connect(functools.partial(ErroHandler.open_stack_dialog, etype, value, tb, msg))
+        button = QPushButton("View message log")
+        button.pressed.connect(ErroHandler.show_message_log)
         widget.layout().addWidget(stackbutton)
         widget.layout().addWidget(button)
-        bar.pushWidget(widget, Qgis.Warning)
+        bar.pushWidget(widget, Qgis.MessageLevel.Warning)
 
     @staticmethod
     def get_plugins_versions():
@@ -141,7 +142,7 @@ class ErroHandler(object):
                 )
                 with open(metadata_path) as mf:
                     cp = ConfigParser()
-                    cp.readfp(mf)
+                    cp.read_file(mf)
                     plugins_versions += "{0} : {1}\n".format(name, cp.get('general', 'version'))
             except:
                 pass
